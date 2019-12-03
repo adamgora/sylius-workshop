@@ -8,7 +8,7 @@ winzou_state_machine:
             - archived
         transitions:
             validate:
-                from: [new],
+                from: [new]
                 to: validated
             archive:
                 from: [validated]
