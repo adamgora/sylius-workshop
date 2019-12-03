@@ -1,0 +1,5 @@
+sylius_resource:
+    resources:
+        app.subcontractor:
+            classes:
+                model: App\Entity\Subcontractor

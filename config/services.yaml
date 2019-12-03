@@ -41,3 +41,6 @@ services:
                     form_type: 'App\Form\Type\WeightBasedShippingCalculatorType',
                     label: 'app.ui.shipping_calculator.weight_based'
                 }
+    App\Listener\AdminMainMenuListener:
+        tags:
+            - {name: kernel.event_listener, event: sylius.menu.admin.main, method: addSubcontractorsMenu}
