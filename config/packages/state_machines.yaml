@@ -13,3 +13,9 @@ winzou_state_machine:
             archive:
                 from: [validated]
                 to: archived
+        callbacks:
+            after:
+                notify:
+                    on: [validate]
+                    do: ['@App\Notifier\SubcontractorValidationNotifierInterface', 'notify']
+                    args: ['object']

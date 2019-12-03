@@ -48,3 +48,6 @@ services:
     App\Form\Type\SubcontractorType:
         arguments:
             - '%app.model.subcontractor.class%'
+
+    App\Notifier\SubcontractorValidationNotifierInterface:
+        public: true
