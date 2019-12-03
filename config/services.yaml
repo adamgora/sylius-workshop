@@ -50,4 +50,7 @@ services:
             - '%app.model.subcontractor.class%'
 
     App\Notifier\SubcontractorValidationNotifierInterface:
+        class: App\Notifier\LogSubcontractorValidationNotifier
+        arguments:
+            - '@logger'
         public: true

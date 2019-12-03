@@ -16,6 +16,6 @@ winzou_state_machine:
         callbacks:
             after:
                 notify:
-                    on: [validate]
+                    on: ['validate']
                     do: ['@App\Notifier\SubcontractorValidationNotifierInterface', 'notify']
                     args: ['object']
