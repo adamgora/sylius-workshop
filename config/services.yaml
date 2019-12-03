@@ -30,4 +30,4 @@ services:
 
     App\Context\TimeBasedChannelContext:
         tags:
-            - {name: sylius.channel.context, priority: 1000}
+            - {name: sylius.context.channel, priority: 1000}
