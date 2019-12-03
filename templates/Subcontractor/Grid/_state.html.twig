@@ -1,3 +1,7 @@
-<span class="ui blue label">
-    <i class="bell icon"></i>{{ data }}
+{% set map = {
+    new: {icon: 'bell', color: 'blue'},
+    validated: {icon: 'star', color: 'yellow'},
+} %}
+<span class="ui {{ map[data].color }} label">
+    <i class="{{ map[data].icon }} icon"></i>{{ data }}
 </span>
