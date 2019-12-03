@@ -16,6 +16,12 @@ class WeightBasedShippingCalculator implements CalculatorInterface
         foreach ($subject->getOrder()->getItems() as $item) {
             $totalWeight += $this->getWeight($item);
         }
+
+        if ($totalWeight >= $configuration['limit_weight']) {
+            return $configuration['above_or_equal'];
+        }
+
+        return $configuration['below'];
     }
 
     public function getType(): string
@@ -23,8 +29,8 @@ class WeightBasedShippingCalculator implements CalculatorInterface
         return 'weight_based';
     }
 
-    private function getWeight(OrderItemInterface $item)
+    private function getWeight(OrderItemInterface $item): float
     {
-        return 0;
+        return $item->getVariant()->getShippingWeight() * $item->getQuantity();
     }
 }
