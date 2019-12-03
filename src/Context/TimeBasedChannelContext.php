@@ -24,6 +24,18 @@ class TimeBasedChannelContext implements ChannelContextInterface
      */
     public function getChannel(): ChannelInterface
     {
+        if ($this->isNight()) {
+            return $this->channelRepository->findOneByCode('NIGHT');
+        }
 
+        return $this->channelRepository->findOneByCode('FASHION_WEB');
     }
+
+    private function isNight(): bool
+    {
+        $now = (int) (new \DateTime())->format('H');
+
+        return $now < 6 || $now > 19;
+    }
+
 }
