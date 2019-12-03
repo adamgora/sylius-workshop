@@ -3,3 +3,4 @@ sylius_resource:
         app.subcontractor:
             classes:
                 model: App\Entity\Subcontractor
+                form: App\Form\Type\SubcontractorType

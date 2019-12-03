@@ -44,3 +44,7 @@ services:
     App\Listener\AdminMainMenuListener:
         tags:
             - {name: kernel.event_listener, event: sylius.menu.admin.main, method: addSubcontractorsMenu}
+
+    App\Form\Type\SubcontractorType:
+        arguments:
+            - '%app.model.subcontractor.class%'
