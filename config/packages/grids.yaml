@@ -25,3 +25,15 @@ sylius_grid:
                         type: update
                     delete:
                         type: delete
+                    validate:
+                        type: apply_transition
+                        label: app.ui.validate
+                        icon: star
+                        options:
+                            link:
+                                route: app_admin_subcontractor_validate
+                                parameters:
+                                    id: resource.id
+                            graph: app_subcontractor
+                            transition: validate
+                            class: yellow
