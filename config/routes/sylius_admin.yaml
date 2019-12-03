@@ -6,7 +6,7 @@ app_subcontractor:
     resource: |
         alias: app.subcontractor
         except: ['show']
-        templates: SylisAdminBundle:Crud
+        templates: SyliusAdminBundle:Crud
         grid: app_admin_subcontractor
         section: admin
     type: sylius.resource
