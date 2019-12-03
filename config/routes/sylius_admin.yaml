@@ -11,3 +11,14 @@ app_subcontractor:
         section: admin
     type: sylius.resource
     prefix: /admin
+    
+app_admin_subcontractor_validate:
+    path: /admin/subcontractors/{id}/validate
+    methods: [PUT]
+    defaults:
+        _controller: app.controller.subcontractor:applyStateMachineTransitionAction
+        _sylius:
+            redirect: referer
+            state_machine:
+                graph: app_subcontractor
+                transition: validate
