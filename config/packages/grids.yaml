@@ -11,6 +11,9 @@ sylius_grid:
                 email:
                     type: string
                     label: sylius.ui.email
+                state:
+                    type: string
+                    label: sylius.ui.state
             actions:
                 main:
                     create:
