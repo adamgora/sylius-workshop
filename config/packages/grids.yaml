@@ -11,3 +11,12 @@ sylius_grid:
                 email:
                     type: string
                     label: sylius.ui.email
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete
