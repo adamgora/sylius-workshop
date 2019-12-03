@@ -1,0 +1,7 @@
+sylius_fixtures:
+    suites:
+        viperprint:
+            fixtures:
+                subcontractor:
+                    options:
+                        count: 15
