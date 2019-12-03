@@ -1,3 +1,13 @@
 sylius_admin:
     resource: "@SyliusAdminBundle/Resources/config/routing.yml"
     prefix: /admin
+    
+app_subcontractor:
+    resource: |
+        alias: app.subcontractor
+        except: ['show']
+        templates: SylisAdminBundle:Crud
+        grid: app_admin_subcontractor
+        section: admin
+    type: sylius.resource
+    prefix: /admin
