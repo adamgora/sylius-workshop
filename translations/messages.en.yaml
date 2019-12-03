@@ -1,0 +1,4 @@
+app:
+    ui:
+        shipping_calculator:
+            weight_based: "Weight-based"
