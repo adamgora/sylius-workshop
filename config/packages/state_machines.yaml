@@ -1,0 +1,21 @@
+winzou_state_machine:
+    app_subcontractor:
+        class: '%app.model.subcontractor.class%'
+        graph: app_subcontractor
+        states:
+            - new
+            - validated
+            - archived
+        transitions:
+            validate:
+                from: [new]
+                to: validated
+            archive:
+                from: [validated]
+                to: archived
+        callbacks:
+            after:
+                notify:
+                    on: ['validate']
+                    do: ['@App\Notifier\SubcontractorValidationNotifierInterface', 'notify']
+                    args: ['object']

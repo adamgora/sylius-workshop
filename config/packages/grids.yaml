@@ -11,6 +11,11 @@ sylius_grid:
                 email:
                     type: string
                     label: sylius.ui.email
+                state:
+                    type: twig
+                    label: sylius.ui.state
+                    options:
+                        template: 'Subcontractor/Grid/_state.html.twig'
             actions:
                 main:
                     create:
@@ -20,3 +25,15 @@ sylius_grid:
                         type: update
                     delete:
                         type: delete
+                    validate:
+                        type: apply_transition
+                        label: app.ui.validate
+                        icon: star
+                        options:
+                            link:
+                                route: app_admin_subcontractor_validate
+                                parameters:
+                                    id: resource.id
+                            graph: app_subcontractor
+                            transition: validate
+                            class: yellow

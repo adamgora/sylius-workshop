@@ -11,6 +11,10 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  */
 class Subcontractor implements ResourceInterface
 {
+    public const STATE_NEW = 'new';
+    public const STATE_VALIDATED = 'validated';
+    public const STATE_ARCHIVED = 'archived';
+
     /**
      * @var int
      *
@@ -33,6 +37,13 @@ class Subcontractor implements ResourceInterface
      * @ORM\Column(type="string")
      */
     private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    private $state = self::STATE_NEW;
 
     /**
      * @return int|null
@@ -72,5 +83,21 @@ class Subcontractor implements ResourceInterface
     public function setEmail(?string $email): void
     {
         $this->email = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getState(): string
+    {
+        return $this->state;
+    }
+
+    /**
+     * @param string $state
+     */
+    public function setState(string $state): void
+    {
+        $this->state = $state;
     }
 }
