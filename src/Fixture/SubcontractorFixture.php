@@ -42,7 +42,7 @@ class SubcontractorFixture extends AbstractFixture
             $subcontractor->setName($this->faker->company);
             $subcontractor->setEmail($this->faker->companyEmail);
 
-            $this->subcontractorManager->persist();
+            $this->subcontractorManager->persist($subcontractor);
         }
 
         $this->subcontractorManager->flush();
