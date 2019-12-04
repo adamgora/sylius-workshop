@@ -66,3 +66,16 @@ services:
     App\AttributeType\RangeAttributeType:
         tags:
             - {name: sylius.attribute.type, attribute_type: 'range', label: 'Range', form_type: App\Form\Type\RangeAttributeType}
+
+    App\PriceCalculator\ProductVariantPriceCalculator:
+        decorates: sylius.calculator.product_variant_price
+        arguments:
+            - '@App\PriceCalculator\ProductVariantPriceCalculator.inner'
+            - '@App\Provider\UnitPriceFactorProviderInterface'
+    
+    sylius.order_processing.order_prices_recalculator:
+        class: App\OrderProcessing\OrderPricesRecalculator
+        arguments:
+            - '@sylius.calculator.product_variant_price'
+        tags:
+            - {name: sylius.order_processor, priority: 40}
