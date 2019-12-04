@@ -34,10 +34,10 @@ class ProductVariantPriceCalculator implements ProductVariantPriceCalculatorInte
     {
         $basePrice = $this->baseVariantPriceCalculator->calculate($productVariant, $context);
 
-        if (!isset($context['orderItem'])) {
+        if (!isset($context['customer'])) {
             return $basePrice;
         }
 
-        return (int) $basePrice * $this->unitPriceFactorProvider->provide($context['orderItem']);
+        return (int) $basePrice * $this->unitPriceFactorProvider->provide($context['customer']);
     }
 }

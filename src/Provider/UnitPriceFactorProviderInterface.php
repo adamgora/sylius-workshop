@@ -2,9 +2,9 @@
 
 namespace App\Provider;
 
-use App\Entity\Order\OrderItem;
+use App\Entity\Customer\Customer;
 
 interface UnitPriceFactorProviderInterface
 {
-    public function provide(OrderItem $orderItem): float;
+    public function provide(Customer $customer): float;
 }
