@@ -114,8 +114,8 @@ class OneClickCheckoutAction
         $customer = $this->shopperContext->getCustomer();
 
         $order->setCustomer($customer);
-        $order->setShippingAddress($customer->getDefaultAddress());
-        $order->setBillingAddress($customer->getDefaultAddress());
+        $order->setShippingAddress(clone $customer->getDefaultAddress());
+        $order->setBillingAddress(clone $customer->getDefaultAddress());
         $order->setChannel($this->shopperContext->getChannel());
         $order->setLocaleCode($this->shopperContext->getLocaleCode());
         $order->setCurrencyCode($this->shopperContext->getCurrencyCode());
