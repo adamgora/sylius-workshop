@@ -20,8 +20,8 @@ class ProductVariantPriceCalculator implements ProductVariantPriceCalculatorInte
     private $baseVariantPriceCalculator;
 
     public function __construct(
-        UnitPriceFactorProviderInterface $unitPriceFactorProvider,
-        ProductVariantPriceCalculatorInterface $baseVariantPriceCalculator
+        ProductVariantPriceCalculatorInterface $baseVariantPriceCalculator,
+        UnitPriceFactorProviderInterface $unitPriceFactorProvider
     ) {
         $this->unitPriceFactorProvider = $unitPriceFactorProvider;
         $this->baseVariantPriceCalculator = $baseVariantPriceCalculator;
