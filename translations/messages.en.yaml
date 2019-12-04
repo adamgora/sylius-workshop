@@ -2,3 +2,8 @@ app:
     ui:
         shipping_calculator:
             weight_based: "Weight-based"
+            
+sylius:
+    form:
+        attribute_type:
+            range: "Range"
