@@ -134,7 +134,7 @@ class Subcontractor implements ResourceInterface
     {
         $this->taxons->removeElement($taxon);
     }
-    
+
     public function countTaxons()
     {
         return $this->taxons->count();
