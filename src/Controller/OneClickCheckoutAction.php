@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Customer\Customer;
 use App\Entity\Order\Order;
 use App\Entity\Order\OrderItem;
 use App\Entity\Product\ProductVariant;
+use Sylius\Component\Core\Context\ShopperContextInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -29,23 +31,39 @@ class OneClickCheckoutAction
      * @var OrderItemQuantityModifierInterface
      */
     private $orderItemQuantityModifier;
+    /**
+     * @var ShopperContextInterface
+     */
+    private $shopperContext;
 
     public function __construct(
         ProductVariantRepositoryInterface $productVariantRepository,
         FactoryInterface $orderFactory,
         FactoryInterface $orderItemFactory,
-        OrderItemQuantityModifierInterface $orderItemQuantityModifier
+        OrderItemQuantityModifierInterface $orderItemQuantityModifier,
+        ShopperContextInterface $shopperContext
     )
     {
         $this->productVariantRepository = $productVariantRepository;
         $this->orderFactory = $orderFactory;
         $this->orderItemFactory = $orderItemFactory;
         $this->orderItemQuantityModifier = $orderItemQuantityModifier;
+        $this->shopperContext = $shopperContext;
     }
 
     public function __invoke(Request $request): Response
     {
         $order = $this->prepareOrder($request);
+
+        /** @var Customer $customer */
+        $customer = $this->shopperContext->getCustomer();
+
+        $order->setCustomer($customer);
+        $order->setShippingAddress($customer->getDefaultAddress());
+        $order->setBillingAddress($customer->getDefaultAddress());
+        $order->setChannel($this->shopperContext->getChannel());
+        $order->setLocaleCode($this->shopperContext->getLocaleCode());
+        $order->setCurrencyCode($this->shopperContext->getCurrencyCode());
     }
 
     /**
