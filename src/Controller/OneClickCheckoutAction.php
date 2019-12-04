@@ -16,6 +16,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 class OneClickCheckoutAction
 {
@@ -73,6 +74,7 @@ class OneClickCheckoutAction
         $this->setOrderData($order);
         $this->applyTransitions($order);
         $this->persist($order);
+        $this->addSuccessMessage($request);
 
         return new RedirectResponse($request->headers->get('referer'));
     }
@@ -139,5 +141,15 @@ class OneClickCheckoutAction
     {
         $this->objectManager->persist($order);
         $this->objectManager->flush();
+    }
+
+    /**
+     * @param Request $request
+     */
+    private function addSuccessMessage(Request $request): void
+    {
+        /** @var FlashBagInterface $flashbag */
+        $flashBag = $request->getSession()->getFlashBag();
+        $flashBag->add('success', 'Thank you for placing this order');
     }
 }
