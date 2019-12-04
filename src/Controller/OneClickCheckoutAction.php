@@ -54,16 +54,7 @@ class OneClickCheckoutAction
     public function __invoke(Request $request): Response
     {
         $order = $this->prepareOrder($request);
-
-        /** @var Customer $customer */
-        $customer = $this->shopperContext->getCustomer();
-
-        $order->setCustomer($customer);
-        $order->setShippingAddress($customer->getDefaultAddress());
-        $order->setBillingAddress($customer->getDefaultAddress());
-        $order->setChannel($this->shopperContext->getChannel());
-        $order->setLocaleCode($this->shopperContext->getLocaleCode());
-        $order->setCurrencyCode($this->shopperContext->getCurrencyCode());
+        $this->setOrderData($order);
     }
 
     /**
@@ -90,5 +81,21 @@ class OneClickCheckoutAction
         $order->addItem($orderItem);
 
         return $order;
+    }
+
+    /**
+     * @param Order $order
+     */
+    private function setOrderData(Order $order): void
+    {
+        /** @var Customer $customer */
+        $customer = $this->shopperContext->getCustomer();
+
+        $order->setCustomer($customer);
+        $order->setShippingAddress($customer->getDefaultAddress());
+        $order->setBillingAddress($customer->getDefaultAddress());
+        $order->setChannel($this->shopperContext->getChannel());
+        $order->setLocaleCode($this->shopperContext->getLocaleCode());
+        $order->setCurrencyCode($this->shopperContext->getCurrencyCode());
     }
 }
