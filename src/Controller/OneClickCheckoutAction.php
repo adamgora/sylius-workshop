@@ -6,7 +6,9 @@ use App\Entity\Customer\Customer;
 use App\Entity\Order\Order;
 use App\Entity\Order\OrderItem;
 use App\Entity\Product\ProductVariant;
+use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Component\Core\Context\ShopperContextInterface;
+use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -35,13 +37,18 @@ class OneClickCheckoutAction
      * @var ShopperContextInterface
      */
     private $shopperContext;
+    /**
+     * @var StateMachineFactoryInterface
+     */
+    private $stateMachineFactory;
 
     public function __construct(
         ProductVariantRepositoryInterface $productVariantRepository,
         FactoryInterface $orderFactory,
         FactoryInterface $orderItemFactory,
         OrderItemQuantityModifierInterface $orderItemQuantityModifier,
-        ShopperContextInterface $shopperContext
+        ShopperContextInterface $shopperContext,
+        StateMachineFactoryInterface $stateMachineFactory
     )
     {
         $this->productVariantRepository = $productVariantRepository;
@@ -49,12 +56,19 @@ class OneClickCheckoutAction
         $this->orderItemFactory = $orderItemFactory;
         $this->orderItemQuantityModifier = $orderItemQuantityModifier;
         $this->shopperContext = $shopperContext;
+        $this->stateMachineFactory = $stateMachineFactory;
     }
 
     public function __invoke(Request $request): Response
     {
         $order = $this->prepareOrder($request);
         $this->setOrderData($order);
+
+        $orderCheckoutStateMachine = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
+        $orderCheckoutStateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS);
+        $orderCheckoutStateMachine->apply(OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
+        $orderCheckoutStateMachine->apply(OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
+        $orderCheckoutStateMachine->apply(OrderCheckoutTransitions::TRANSITION_COMPLETE);
     }
 
     /**
