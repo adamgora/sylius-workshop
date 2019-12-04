@@ -62,3 +62,7 @@ services:
             - '@Faker\Generator'
         tags:
             - {name: sylius_fixtures.fixture}
+    
+    App\AttributeType\RangeAttributeType:
+        tags:
+            - {name: sylius.attribute.type, attribute_type: 'range', label: 'Range', form_type: App\Form\Type\RangeAttributeType}
