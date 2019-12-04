@@ -85,7 +85,7 @@ class OneClickCheckoutAction
      */
     private function prepareOrder(Request $request): Order
     {
-        $variantId = $request->attributes->getInt('vartiantId');
+        $variantId = $request->attributes->getInt('variantId');
 
         /** @var ProductVariant $productVariant */
         $productVariant = $this->productVariantRepository->find($variantId);
