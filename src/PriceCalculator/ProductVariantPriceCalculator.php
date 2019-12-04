@@ -6,7 +6,7 @@ use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-class HardcodedPriceCalculator implements ProductVariantPriceCalculatorInterface
+class ProductVariantPriceCalculator implements ProductVariantPriceCalculatorInterface
 {
     /**
      * @inheritDoc
