@@ -86,3 +86,13 @@ services:
             - '@sylius.calculator.product_variant_price'
         tags:
             - {name: templating.helper, alias: 'sylius_resolve_variant'}
+    
+    App\Controller\OneClickCheckoutAction:
+        arguments:
+            - '@sylius.repository.product_variant'
+            - '@sylius.factory.order'
+            - '@sylius.factory.order_item'
+            - '@sylius.order_item_quantity_modifier'
+            - '@sylius.context.shopper'
+            - '@sm.factory'
+            - '@sylius.manager.order'
