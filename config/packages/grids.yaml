@@ -11,6 +11,10 @@ sylius_grid:
                 email:
                     type: string
                     label: sylius.ui.email
+                taxons:
+                    type: string
+                    label: sylius.ui.taxons
+                    path: countTaxons
                 state:
                     type: twig
                     label: sylius.ui.state
