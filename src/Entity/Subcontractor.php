@@ -119,4 +119,19 @@ class Subcontractor implements ResourceInterface
     {
         $this->state = $state;
     }
+
+    public function getTaxons(): Collection
+    {
+        return $this->taxons;
+    }
+
+    public function addTaxon(Taxon $taxon)
+    {
+        $this->taxons->add($taxon);
+    }
+
+    public function removeTaxon(Taxon $taxon)
+    {
+        $this->taxons->removeElement($taxon);
+    }
 }
