@@ -35,6 +35,12 @@ class PriceHelper extends Helper
     {
         Assert::keyExists($context, 'channel');
 
+        $customer = $this->customerContext->getCustomer();
+
+        if(null !== $customer) {
+            $context['customer'] = $customer;
+        }
+
         return $this
             ->productVariantPriceCalculator
             ->calculate($productVariant, $context);

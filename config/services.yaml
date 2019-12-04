@@ -79,3 +79,10 @@ services:
             - '@sylius.calculator.product_variant_price'
         tags:
             - {name: sylius.order_processor, priority: 40}
+
+    sylius.templating.helper.price:
+        class: App\Twig\Helper\PriceHelper
+        arguments:
+            - '@sylius.calculator.product_variant_price'
+        tags:
+            - {name: templating.helper, alias: 'sylius_resolve_variant'}
