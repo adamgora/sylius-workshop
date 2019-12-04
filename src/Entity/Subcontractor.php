@@ -52,8 +52,8 @@ class Subcontractor implements ResourceInterface
      * @var Collection|Taxon[]
      * @ORM\ManyToMany(targetEntity="App\Entity\Taxonomy\Taxon")
      * @ORM\JoinTable(
-     *     name="app_subcontractors_taxons"
-     *     joinColumns={@ORM\JoinColumn(name="subcontractor_id", referencedColumnName="id")}
+     *     name="app_subcontractors_taxons",
+     *     joinColumns={@ORM\JoinColumn(name="subcontractor_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="taxon_id", referencedColumnName="id")}
      * )
      */
