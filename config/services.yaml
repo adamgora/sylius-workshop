@@ -75,7 +75,7 @@ services:
     
     sylius.order_processing.order_prices_recalculator:
         class: App\OrderProcessing\OrderPricesRecalculator
-        agruments:
+        arguments:
             - '@sylius.calculator.product_variant_price'
         tags:
             - {name: sylius.order_processor, priority: 40}
