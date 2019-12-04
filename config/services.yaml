@@ -66,3 +66,6 @@ services:
     App\AttributeType\RangeAttributeType:
         tags:
             - {name: sylius.attribute.type, attribute_type: 'range', label: 'Range', form_type: App\Form\Type\RangeAttributeType}
+    
+    sylius.calculator.product_variant_price:
+        class: App\PriceCalculator\HardcodedPriceCalculator
