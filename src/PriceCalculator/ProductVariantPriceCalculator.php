@@ -2,12 +2,31 @@
 
 namespace App\PriceCalculator;
 
+use App\Provider\UnitPriceFactorProviderInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
 class ProductVariantPriceCalculator implements ProductVariantPriceCalculatorInterface
 {
+    /**
+     * @var UnitPriceFactorProviderInterface
+     */
+    private $unitPriceFactorProvider;
+
+    /**
+     * @var ProductVariantPriceCalculatorInterface
+     */
+    private $baseVariantPriceCalculator;
+
+    public function __construct(
+        UnitPriceFactorProviderInterface $unitPriceFactorProvider,
+        ProductVariantPriceCalculatorInterface $baseVariantPriceCalculator
+    ) {
+        $this->unitPriceFactorProvider = $unitPriceFactorProvider;
+        $this->baseVariantPriceCalculator = $baseVariantPriceCalculator;
+    }
+
     /**
      * @inheritDoc
      */
