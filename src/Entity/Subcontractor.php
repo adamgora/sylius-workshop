@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use App\Entity\Taxonomy\Taxon;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
@@ -44,6 +47,22 @@ class Subcontractor implements ResourceInterface
      * @ORM\Column(type="string")
      */
     private $state = self::STATE_NEW;
+
+    /**
+     * @var Collection|Taxon[]
+     * @ORM\ManyToMany(targetEntity="App\Entity\Taxonomy\Taxon")
+     * @ORM\JoinTable(
+     *     name="app_subcontractors_taxons"
+     *     joinColumns={@ORM\JoinColumn(name="subcontractor_id", referencedColumnName="id")}
+     *     inverseJoinColumns={@ORM\JoinColumn(name="taxon_id", referencedColumnName="id")}
+     * )
+     */
+    private $taxons;
+
+    public function __construct()
+    {
+        $this->taxons = new ArrayCollection();
+    }
 
     /**
      * @return int|null
