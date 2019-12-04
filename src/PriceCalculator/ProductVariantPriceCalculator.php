@@ -32,6 +32,12 @@ class ProductVariantPriceCalculator implements ProductVariantPriceCalculatorInte
      */
     public function calculate(ProductVariantInterface $productVariant, array $context): int
     {
-        return 1000;
+        $basePrice = $this->baseVariantPriceCalculator->calculate($productVariant, $context);
+
+        if (!$context['orderItem']) {
+            return $basePrice;
+        }
+
+        return (int) $basePrice * $this->unitPriceFactorProvider->provide($context['orderItem']);
     }
 }
