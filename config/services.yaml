@@ -54,14 +54,6 @@ services:
         arguments:
             - '@logger'
         public: true
-        
-    App\Fixture\SubcontractorFixture:
-        arguments:
-            - '@app.factory.subcontractor'
-            - '@app.manager.subcontractor'
-            - '@Faker\Generator'
-        tags:
-            - {name: sylius_fixtures.fixture}
     
     App\AttributeType\RangeAttributeType:
         tags:
